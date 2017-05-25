@@ -26,10 +26,14 @@
     <string name="dialog_cancel">Cancel</string>
     <string name="dialog_add">Add</string>
 
-    <string name="error_no_network">No network connectivity! Will load stock cursor when the network is available.</string>
+    <string name="error_no_network">No network connectivity! Will load stock when the network is available.</string>
     <string name="error_no_stocks">No stocks added! Hit the floating action button to add one.</string>
+    <string name="error_invalid_stock"> <xliff:g id="symbol">%s</xliff:g> is not a valid stock, please pick a valid stock</string>
 
     <string name="toast_stock_added_no_connectivity">Symbol <xliff:g id="symbol">%s</xliff:g>  added. Will refresh when network available.</string>
     <string name="toast_no_connectivity">Will refresh when network available.</string>
+    <string name="add_stock">Add Stock</string>
+    <string name="stock_trend_date"><xliff:g id="symbol"> %s</xliff:g> stock trend over the past week</string>
+    <string name="stock_trend_amount"><xliff:g id="symbol"> %s</xliff:g> stock price trend over the past 5 years</string>
 
 </resources>

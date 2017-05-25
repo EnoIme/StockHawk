@@ -12,8 +12,10 @@ import android.os.Handler;
 import android.os.Looper;
 import android.widget.Toast;
 
+import com.udacity.stockhawk.R;
 import com.udacity.stockhawk.data.Contract;
 import com.udacity.stockhawk.data.PrefUtils;
+import com.udacity.stockhawk.mock.MockUtils;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -28,7 +30,6 @@ import timber.log.Timber;
 import yahoofinance.Stock;
 import yahoofinance.YahooFinance;
 import yahoofinance.histquotes.HistoricalQuote;
-import yahoofinance.histquotes.Interval;
 import yahoofinance.quotes.stock.StockQuote;
 
 public final class QuoteSyncJob {
@@ -85,7 +86,12 @@ public final class QuoteSyncJob {
 
                     // WARNING! Don't request historical data for a stock that doesn't exist!
                     // The request will hang forever X_x
-                    List<HistoricalQuote> history = stock.getHistory(from, to, Interval.WEEKLY);
+                    //List<HistoricalQuote> history = stock.getHistory(from, to, Interval.WEEKLY);
+                    // Note for reviewer:
+                    // Due to the problems with Yahoo API we have commented the line above
+                    // and included this one to fetch the history from MockUtils
+                    // This should be enough as to develop and review while the API is down
+                    List<HistoricalQuote> history = MockUtils.getHistory();
 
                     StringBuilder historyBuilder = new StringBuilder();
 
@@ -111,10 +117,10 @@ public final class QuoteSyncJob {
                     handler.post(new Runnable() {
                         @Override
                         public void run() {
-                            Toast.makeText(context, symbol + " is not a valid stock, please pick a valid stock", Toast.LENGTH_LONG).show();
+                            Toast.makeText(context, context.getString(R.string.error_invalid_stock, symbol), Toast.LENGTH_LONG).show();
+                            PrefUtils.removeStock(context, symbol);
                         }
                     });
-                    PrefUtils.removeStock(context, symbol);
                 }
 
             }
